@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Clicker Counter - By Nabil</title>
+    <meta name="theme-color" content="#36393F">
+        <meta property="og:image:url" content="https://i.ibb.co/crzLKF5/Untitled-1.png">
+        <meta property="og:image:secure_url" content="https://i.ibb.co/crzLKF5/Untitled-1.png">
+        <meta name="description" content="Test how many times you click in a second!">
+        <link rel="icon" type="image/jpeg" sizes="180x180" href="https://i.ibb.co/crzLKF5/Untitled-1.png">
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+        background-image: linear-gradient(150deg, rgb(100, 150, 150), rgb(0, 0, 0));
+      }
+      * {
+        font-family: Helvetica;
+      }
+      button {
+        height: 200px;
+        width: 200px;
+        border-radius: 100px;
+        background-color: rgb(25, 25, 25);
+        color: rgb(255, 255, 255);
+        border: none;
+        margin: 1px 0px 0px 2px;
+        padding: 5px 0px 0px 0px;
+      }
+      #gradient {
+        width: 204px;
+        height: 204px;
+        background-image: linear-gradient(rgb(50, 255, 255), rgb(0, 100, 100));
+        border-radius: 102px;
+      }
+      button:focus {
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="gradient">
+      <button id="clicker" onclick="cl()"><b>Click to Begin</b></button>
+    </div>
+    <script>
+      document.getElementById("gradient").style.marginLeft = (window.innerWidth / 2 - 102) + "px";
+      document.getElementById("gradient").style.marginTop = (window.innerHeight / 2 - 102) + "px";
+      document.getElementById("gradient").style.marginBottom = (window.innerHeight / 2 - 102) + "px";
+      var clicks = 0;
+      var mil;
+      var lastClick;
+      document.body.onclick = function() {
+        mil = new Date().getTime();
+        document.body.onclick = function() {};
+      };
+      console.log("D");
+      function cl() {
+        clicks++;
+        lastClick = new Date().getTime();
+      }
+      setInterval(function() {
+        if (mil) {
+          document.getElementById("clicker").innerHTML = "<b>" + Math.floor(clicks / ((new Date().getTime() - mil) / 1000) * 100) / 100 + " CPS</b>";
+        }
+        if (lastClick - new Date().getTime() < -3000) {
+          document.getElementById("clicker").innerHTML = "<b>Click to Begin</b>";
+          clicks = 0;
+          mil = undefined;
+          lastClick = undefined;
+          document.body.onclick = function() {
+            mil = new Date().getTime();
+            document.body.onclick = function() {};
+          };
+        }
+      }, 1);
+    </script>
+  </body>
+</html>
